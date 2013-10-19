@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="angular.js"></script>
+<script src="ng-calc.js"></script>
+<style>
+body *{
+    font-family: Arial;
+}
+
+#frame{
+    margin: auto;
+    max-width: 600px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th{
+    text-align: left;
+}
+
+td.money input, td.money{
+    text-align: right;
+}
+
+input{
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.total td{
+    border-top: 2px solid;
+}
+
+.remove {
+    text-align: right;
+}
+.remove button{
+    font-size: 0.6em;
+}
+</style>
+<meta charset=utf-8 />
+<title>Balance Sheet</title>
+</head>
+<body ng-app="ng-calc" ng-init="items=[{}]">
+<div id=frame>
+<table>
+<thead>
+    <tr>
+        <th>Payee</th>
+        <th>Checks</th>
+        <th>Deposits</th>
+        <th>Balance</th>
+    </tr>
+</thead>
+<tbody>
+    <tr ng-repeat="item in items">
+        <td><input ng-model="payee"></td>
+        <td class="money"><input type=text ng-model="item.check"></td>
+        <td class="money"><input type=text ng-model="item.deposit"></td>
+        <td class="remove"><button ng-click="items.splice($index, 1)">remove</button></td>
+    </tr>
+    <tr class="total">
+        <td></td>
+        <td class=money>$<sum ng-model="totalExpenses" for="item in items" expr="item.check"/></td>
+        <td class=money>$<sum ng-model="totalDeposits" for="item in items" expr="item.deposit"/></td>
+        <td class=money>${{totalDeposits - totalExpenses}}</td>
+    </tr>
+</tbody>
+</table>
+<button ng-click="items.push({})">Add New Item</button>
+</div>
+</body>
+</html>

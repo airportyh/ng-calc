@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="chart.js"></script>
+<script src="angular.js"></script>
+<script src="ng-calc.js"></script>
+<meta charset=utf-8 />
+<title>JS Bin</title>
+<style>
+body *{
+    font-family: Arial;
+}
+
+input[type=text]{
+    text-align: right;
+}
+</style>
+</head>
+<body ng-app="ng-calc" ng-init="months=[
+{name: 'January', amount: 10},
+{name: 'Febuary', amount: 20},
+{name: 'March', amount: 30},
+{name: 'April', amount: 4},
+{name: 'May', amount: 10},
+{name: 'June', amount: 5},
+{name: 'July', amount: 20},
+{name: 'August', amount: 15},
+{name: 'September', amount: 16},
+{name: 'October', amount: 17},
+{name: 'November', amount: 18},
+{name: 'December', amount: 0}
+]">
+<h2>Precipitation By Month</h2>
+<table style="display: inline-block">
+<thead>
+    <tr>
+        <th>Month</th>
+        <th>Amount(inches)</th>
+    </tr>
+</thead>
+<tbody>
+    <tr ng-repeat="month in months">
+        <td>{{month.name}}</td>
+        <td><input type=text ng-model="month.amount"></td>
+    </tr>
+</tbody>
+</table>
+<div  style="display: inline-block">
+<barchart data="months" label="name" value="amount"></barchart>
+</div>
+</body>
+</html>
